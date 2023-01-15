@@ -6,14 +6,13 @@ const numDig = 10;
  */
 function telephoneCheck(str) {
     // First we check if the string has a invalid non numeric combination
-    if (!checkInvalid(str)) return false;
+    if (!checkInvalid(str))
+        return false;
 
-    // We get the numbers array without NaN
-    var ns = str
+    // We get the string without NaN and the possible array lens
+    const ns = str
         .split(/[^0-9]/)
         .filter(d => d);
-
-    // We check the possible array lens
     switch (ns.length) {
         case 4:
             // If it has 4 groups of digits it has to have 1 as first
@@ -35,7 +34,7 @@ function telephoneCheck(str) {
  */
 function checkDigits(nums) {
     // We join all the digits as a string
-    var phone = nums.join("");
+    const phone = nums.join("");
 
     // If it doesnt have 10 digits, is not a valid number
     if (phone.length != numDig) return false;
@@ -51,17 +50,21 @@ function checkInvalid(str) {
     if (str[0] == "-") return false;
 
     // If it doesn't have correct parenthesis pairing, is invalid
-    for (var i = 0; i < str.length; i++) {
+    for (let i = 0; i < str.length; i++) {
         // Checks wether open parenthesis is grouped with closed
-        if (str[i] == "(") {
+        if (str[i] == "(")
             return str[i + 4] == ")";
-        }
 
         // Checks if there's a closing parenthesis without opening
-        if (str[i] == ")") {
+        if (str[i] == ")")
             return false;
-        }
     }
 
     return true;
 }
+
+// Examples of execution
+console.log(telephoneCheck('1 (234) 567 890'));
+console.log(telephoneCheck('1 234 567 8901'));
+console.log(telephoneCheck('555-555-5555'));
+console.log(telephoneCheck('555) 555-5555'));
